@@ -1,16 +1,23 @@
+const secondHand = document.querySelector('.second-hand');
+const minuteHand = document.querySelector('.minute-hand');
+const hourHand = document.querySelector('.hour-hand');
 
-    // Get the clockface element
-    var clockface = document.getElementById('clockface');
+function setDate() {
+  const now = new Date();
 
-    // Get the clock hands
-    var secondHand = clockface.querySelector('.second-hand');
-    var minuteHand = clockface.querySelector('.minute-hand');
-    var hourHand = clockface.querySelector('.hour-hand');
+  const seconds = now.getSeconds();
+  const secondsDegrees = ((seconds / 60) * 360) + 90;
+  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
-    // Function to update the clock hands
-    function updateClock() {
-      // Get the current time
-      var now = new Date();
+  const minutes = now.getMinutes();
+  const minutesDegrees = ((minutes / 60) * 360) + ((seconds/60)*6) + 90;
+  minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 
-      //
-    }
+  const hours = now.getHours();
+  const hoursDegrees = ((hours / 12) * 360) + ((minutes/60)*30) + 90;
+  hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+}
+
+setInterval(setDate, 1000);
+
+setDate();
